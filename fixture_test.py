@@ -5,17 +5,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 import pytest 
 
-@pytest.fixture
-def driver():
-    driver = webdriver.Firefox()
-    driver.get("https://www.saucedemo.com")
-    yield driver
-    driver.quit()
-@pytest.fixture
-def wait(driver):
-    wait = WebDriverWait(driver, 10)
-    wait.until(EC.presence_of_element_located((By.ID, "user-name")))
-    yield wait
 
 def test_login_form(driver, wait):
     driver.find_element(By.ID, "user-name").send_keys("standard_user")
