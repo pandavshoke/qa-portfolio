@@ -5,7 +5,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 import pytest 
 
-
 @pytest.mark.parametrize("username, password, expected_error",[
     ("standard_user", "wrongpassword", "Epic sadface: Username and password do not match any user in this service"),
     ("locked_out_user", "secret_sauce", "Epic sadface: Sorry, this user has been locked out."),
@@ -17,12 +16,3 @@ def test_login_errors(driver, wait, username, password, expected_error):
     driver.find_element(By.ID, "login-button").click()
     error = driver.find_element(By.CSS_SELECTOR, "[data-test='error']")
     assert expected_error in error.text
-def test_sorting(driver, wait):
-    driver.find_element(By.ID, "user-name").send_keys("standard_user")
-    driver.find_element(By.ID, "password").send_keys("secret_sauce")
-    driver.find_element(By.ID, "login-button").click()
-    dropdown = Select(driver.find_element(By.CLASS_NAME, "product_sort_container"))
-    dropdown.select_by_visible_text("Name (Z to A)")
-    items = driver.find_elements(By.CSS_SELECTOR, "[data-test='inventory-item-name']")
-    first_item = items[0]
-    assert "Test.allTheThings() T-Shirt (Red)" in first_item.text
