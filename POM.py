@@ -37,4 +37,19 @@ class CartPage:
         return [item.text for item in cart_items]
     def click_checkout(self):
         self.driver.find_element(By.ID, "checkout").click()
-    
+class CheckoutPage:
+    def __init__(self, driver):
+        self.driver = driver
+    def firstName(self, firstName):
+        self.driver.find_element(By.CSS_SELECTOR, "[data-test='firstName']").send_keys(firstName)
+    def lastName(self, lastName):
+        self.driver.find_element(By.CSS_SELECTOR, "[data-test='lastName']").send_keys(lastName)
+    def postalCode(self, postalCode):
+        self.driver.find_element(By.CSS_SELECTOR, "[data-test='postalCode']").send_keys(postalCode)
+    def click_continue(self):
+        self.driver.find_element(By.CSS_SELECTOR, "[data-test='continue']").click()
+    def click_finish(self):
+        self.driver.find_element(By.CSS_SELECTOR, "[data-test='finish']").click()
+    def get_success_message(self):
+            success_message = self.driver.find_element(By.CSS_SELECTOR, "[data-test='complete-header']")
+            return success_message.text
