@@ -1,5 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class LoginPage:
@@ -49,6 +51,9 @@ class CheckoutPage:
     def click_continue(self):
         self.driver.find_element(By.CSS_SELECTOR, "[data-test='continue']").click()
     def click_finish(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "[data-test='finish']"))
+        )
         self.driver.find_element(By.CSS_SELECTOR, "[data-test='finish']").click()
     def get_success_message(self):
             success_message = self.driver.find_element(By.CSS_SELECTOR, "[data-test='complete-header']")
