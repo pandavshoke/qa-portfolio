@@ -36,7 +36,7 @@ class CartPage:
         cart_items = self.driver.find_elements(By.CSS_SELECTOR, "[data-test='inventory-item-name']")
         return [item.text for item in cart_items]
     def click_checkout(self):
-        self.driver.find_element(By.ID, "checkout").click()
+        self.driver.find_element(By.CSS_SELECTOR, "[data-test='checkout']").click()
 class CheckoutPage:
     def __init__(self, driver):
         self.driver = driver
