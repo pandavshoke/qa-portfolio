@@ -22,7 +22,9 @@ jobs:
 
     - name: Install Firefox
       run: |
-        sudo apt-get install -y firefox
+        sudo apt-get update
+        sudo apt-get install -y firefox-esr
+        sudo ln -sf /usr/bin/firefox-esr /usr/bin/firefox
 
     - name: Run tests
       run: |
