@@ -43,6 +43,9 @@ class CheckoutPage:
     def __init__(self, driver):
         self.driver = driver
     def firstName(self, firstName):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "[data-test='firstName']"))
+        )
         self.driver.find_element(By.CSS_SELECTOR, "[data-test='firstName']").send_keys(firstName)
     def lastName(self, lastName):
         self.driver.find_element(By.CSS_SELECTOR, "[data-test='lastName']").send_keys(lastName)
